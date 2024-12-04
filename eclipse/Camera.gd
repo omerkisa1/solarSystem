@@ -1,14 +1,13 @@
 extends Camera
 
-# Hareket ve zoom parametreleri
-var speed = 10.0
-var sensitivity = 0.1
-var pan_speed = 0.5
-var zoom_speed = 2.0
-var min_distance = 2.0
-var max_distance = 50.0
+# Zoom parametreleri
+var zoom_speed = 5.0
+var min_distance = 2.0  # Minimum yakınlık
+var max_distance = 150.0  # Maksimum uzaklık
 
-# Durum değişkenleri
+# Pan ve Döndürme Kontrolleri
+var sensitivity = 0.1
+var pan_speed = 5.0
 var mouse_middle_pressed = false
 var mouse_left_pressed = false
 var last_mouse_position = Vector2()
@@ -38,26 +37,12 @@ func _input(event):
 
 	# Fare tekerleği ile zoom
 	if event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_UP:
-		zoom_camera(-zoom_speed)
+		zoom_camera(-zoom_speed)  # Yakınlaştır
 	elif event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_DOWN:
-		zoom_camera(zoom_speed)
+		zoom_camera(zoom_speed)  # Uzaklaştır
 
 func zoom_camera(amount):
 	# Kamerayı Z ekseni boyunca ileri/geri hareket ettir
 	var new_translation = translation + transform.basis.z * amount
 	if new_translation.length() >= min_distance and new_translation.length() <= max_distance:
 		translation = new_translation
-
-func _process(delta):
-	# Klavye ile serbest hareket (W, A, S, D)
-	var input_vector = Vector3()
-	if Input.is_action_pressed("ui_up"):  # W tuşu
-		input_vector.z -= 1
-	if Input.is_action_pressed("ui_down"):  # S tuşu
-		input_vector.z += 1
-	if Input.is_action_pressed("ui_left"):  # A tuşu
-		input_vector.x -= 1
-	if Input.is_action_pressed("ui_right"):  # D tuşu
-		input_vector.x += 1
-	input_vector = input_vector.normalized()
-	translate(input_vector * speed * delta)
