@@ -1,12 +1,9 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://MeshInstance.gd" type="Script" id=1]
 [ext_resource path="res://earth.gd" type="Script" id=2]
 [ext_resource path="res://Camera.gd" type="Script" id=3]
-[ext_resource path="res://2k_sun.jpg" type="Texture" id=4]
-[ext_resource path="res://2k_earth_daymap.jpg" type="Texture" id=5]
 [ext_resource path="res://moon.gd" type="Script" id=6]
-[ext_resource path="res://2k_moon.jpg" type="Texture" id=7]
 [ext_resource path="res://EarthOrbit.gd" type="Script" id=8]
 [ext_resource path="res://MoonOrbit.gd" type="Script" id=9]
 
@@ -19,7 +16,6 @@ shader = SubResource( 1 )
 material = SubResource( 2 )
 
 [sub_resource type="SpatialMaterial" id=7]
-albedo_texture = ExtResource( 4 )
 emission_enabled = true
 emission = Color( 1, 0.513726, 0, 1 )
 emission_energy = 0.85
@@ -29,7 +25,6 @@ emission_on_uv2 = false
 [sub_resource type="SphereMesh" id=5]
 
 [sub_resource type="SpatialMaterial" id=6]
-albedo_texture = ExtResource( 5 )
 emission_enabled = true
 emission = Color( 0, 0, 0, 1 )
 emission_energy = 0.32
@@ -39,7 +34,6 @@ emission_on_uv2 = false
 [sub_resource type="SphereMesh" id=8]
 
 [sub_resource type="SpatialMaterial" id=9]
-albedo_texture = ExtResource( 7 )
 
 [node name="Spatial" type="Spatial"]
 
