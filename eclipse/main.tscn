@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://MeshInstance.gd" type="Script" id=1]
 [ext_resource path="res://earth.gd" type="Script" id=2]
@@ -66,6 +66,10 @@ shader_param/sun_position = null
 shader_param/earth_position = null
 shader_param/earth_radius = null
 
+[sub_resource type="CylinderMesh" id=13]
+top_radius = 10.0
+height = 0.1
+
 [node name="Spatial" type="Spatial"]
 
 [node name="Camera" type="Camera" parent="."]
@@ -105,3 +109,6 @@ mesh = SubResource( 8 )
 skeleton = NodePath("../../../../sun")
 material/0 = SubResource( 12 )
 script = ExtResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="EarthOrbit"]
+mesh = SubResource( 13 )
