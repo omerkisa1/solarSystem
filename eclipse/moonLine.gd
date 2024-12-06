@@ -1,19 +1,18 @@
 extends ImmediateGeometry
 
-var trail_points = []
-var max_points = 200  # Maksimum nokta sayısı
+var radius = 10.0  # Yörünge yarıçapı (örneğin, Dünya için 10 birim)
+var segments = 64  # Dairenin ne kadar pürüzsüz olacağı (daha fazla segment = daha pürüzsüz çizgi)
 
-func _process(delta):
-	# Mevcut pozisyonu trail_points'e ekle
-	trail_points.append(global_transform.origin)
-	
-	# Maksimum noktayı aşarsa en eski noktayı sil
-	if trail_points.size() > max_points:
-		trail_points.pop_front()
+func _ready():
+	draw_orbit()
 
-	# Çizgiyi çizin
-	clear()
-	begin(Mesh.PRIMITIVE_LINE_STRIP)
-	for point in trail_points:
-		add_vertex(point)
+func draw_orbit():
+	clear()  # Önceki çizimi temizle
+	begin(Mesh.PRIMITIVE_LINE_LOOP)  # Kapalı bir daire çizin
+
+	for i in range(segments):
+		var angle = i * 2.0 * PI / segments  # Daire için açıyı hesapla
+		var x = radius * cos(angle)  # X ekseni için nokta
+		var z = radius * sin(angle)  # Z ekseni için nokta
+		add_vertex(Vector3(x, 0, z))  # Çizgi için bir nokta ekle
 	end()

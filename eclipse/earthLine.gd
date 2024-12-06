@@ -1,20 +1,15 @@
-extends ImmediateGeometry
+extends Line2D
 
-var trail_points = []
-var max_points = 200  # Maksimum nokta sayısı
+var radius = 200.0  # Yörünge yarıçapı (2D için büyük bir değer kullanın)
+var segments = 64  # Dairenin pürüzsüzlüğü
 
-func _process(delta):
-	# İz bırakması için pozisyonu ekle
-	var current_position = global_transform.origin
-	trail_points.append(current_position)
+func _ready():
+	draw_orbit()
 
-	# Maksimum noktayı aşarsa eski noktaları sil
-	if trail_points.size() > max_points:
-		trail_points.pop_front()
-
-	# Çizgiyi güncelle
-	clear()
-	begin(Mesh.PRIMITIVE_LINE_STRIP)
-	for point in trail_points:
-		add_vertex(point)
-	end()
+func draw_orbit():
+	clear_points()  # Önceki noktaları temizle
+	for i in range(segments):
+		var angle = i * 2.0 * PI / segments
+		var x = radius * cos(angle)
+		var y = radius * sin(angle)
+		add_point(Vector2(x, y))  # Her noktayı 2D uzayda ekle

@@ -12,6 +12,18 @@ var mouse_middle_pressed = false
 var mouse_left_pressed = false
 var last_mouse_position = Vector2()
 
+# Dünya'ya odaklanma ayarları
+var is_locked_on_earth = false  # Kamera Dünya'ya kilitlenmiş mi?
+onready var earth = null  # Dünya düğümüne referans
+
+func _ready():
+	# Dünya düğümünü bul
+	earth = get_node("../EarthOrbit/earth")  # Sahne yapınıza göre bu yolu kontrol edin
+	if earth:
+		print("Dünya bulundu: ", earth.name)
+	else:
+		print("Dünya bulunamadı! Yol hatalı olabilir.")
+
 func _input(event):
 	# Orta fare tuşuyla pan kontrolü
 	if event is InputEventMouseButton:
@@ -22,8 +34,16 @@ func _input(event):
 			mouse_left_pressed = event.pressed
 			last_mouse_position = event.position
 
-	# Fare hareketini kontrol et
-	if event is InputEventMouseMotion:
+	# Dünya'ya odaklanma tuşu (örnek: F tuşu)
+	if Input.is_action_just_pressed("ui_focus"):
+		is_locked_on_earth = !is_locked_on_earth  # Kilit durumunu değiştirin
+		if is_locked_on_earth:
+			print("Kamera Dünya'ya odaklandı.")
+		else:
+			print("Kamera serbest moda geçti.")
+
+	# Fare hareketini kontrol et (serbest moddayken)
+	if event is InputEventMouseMotion and not is_locked_on_earth:
 		if mouse_middle_pressed:  # Pan hareketi
 			var delta = event.position - last_mouse_position
 			translate(Vector3(-delta.x * pan_speed * 0.01, delta.y * pan_speed * 0.01, 0))
@@ -46,3 +66,8 @@ func zoom_camera(amount):
 	var new_translation = translation + transform.basis.z * amount
 	if new_translation.length() >= min_distance and new_translation.length() <= max_distance:
 		translation = new_translation
+
+func _process(delta):
+	# Eğer Dünya'ya kilitlenmişse, Dünya'ya odaklan
+	if is_locked_on_earth and earth:
+		look_at(earth.global_transform.origin, Vector3.UP)
