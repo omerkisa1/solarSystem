@@ -20,6 +20,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g23pj"]
 albedo_texture = ExtResource("2_1lra1")
+emission_enabled = true
+emission_texture = ExtResource("2_1lra1")
 
 [sub_resource type="SphereMesh" id="SphereMesh_dwl34"]
 
@@ -40,6 +42,8 @@ sky_material = SubResource("PanoramaSkyMaterial_nxa0u")
 [sub_resource type="Environment" id="Environment_dcrbj"]
 background_mode = 2
 sky = SubResource("Sky_p175r")
+ambient_light_color = Color(1, 1, 1, 1)
+glow_enabled = true
 
 [node name="Node" type="Node"]
 script = ExtResource("1_ahblu")
@@ -55,22 +59,23 @@ surface_material_override/0 = SubResource("StandardMaterial3D_g23pj")
 script = ExtResource("3_lj6fl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/sun"]
-sky_mode = 1
 script = ExtResource("4_xmukb")
 
 [node name="EarthOrbit" type="Node3D" parent="Node3D"]
 script = ExtResource("5_57xwx")
 
 [node name="Earth" type="MeshInstance3D" parent="Node3D/EarthOrbit"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 50, 0, 0)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 58.2929, 0, 0)
 mesh = SubResource("SphereMesh_dwl34")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ub6i")
 script = ExtResource("6_m18wu")
 
 [node name="MoonOrbit" type="Node3D" parent="Node3D/EarthOrbit/Earth"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82929, 0, 0)
 script = ExtResource("7_6jblq")
 
 [node name="Moon" type="MeshInstance3D" parent="Node3D/EarthOrbit/Earth/MoonOrbit"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 mesh = SubResource("SphereMesh_2jek4")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_1wjv4")
