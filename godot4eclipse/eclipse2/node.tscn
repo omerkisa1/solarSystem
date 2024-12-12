@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dg167vewhsmpr"]
+[gd_scene load_steps=27 format=3 uid="uid://dg167vewhsmpr"]
 
 [ext_resource type="Script" path="res://camera_3d.gd" id="1_4jn50"]
 [ext_resource type="Script" path="res://node.gd" id="1_ahblu"]
@@ -23,6 +23,12 @@
 albedo_texture = ExtResource("2_1lra1")
 emission_enabled = true
 emission_texture = ExtResource("2_1lra1")
+
+[sub_resource type="TorusMesh" id="TorusMesh_ems6u"]
+uv2_padding = 2.14
+inner_radius = 1.984
+outer_radius = 2.0
+ring_segments = 3
 
 [sub_resource type="SphereMesh" id="SphereMesh_dwl34"]
 
@@ -65,11 +71,14 @@ script = ExtResource("3_lj6fl")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/sun"]
 script = ExtResource("4_xmukb")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D/sun"]
+mesh = SubResource("TorusMesh_ems6u")
+
 [node name="EarthOrbit" type="Node3D" parent="Node3D"]
 script = ExtResource("5_57xwx")
 
 [node name="Earth" type="MeshInstance3D" parent="Node3D/EarthOrbit"]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 58.2929, 0, 0)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 59.7006, 0, 0)
 mesh = SubResource("SphereMesh_dwl34")
 surface_material_override/0 = SubResource("StandardMaterial3D_8ub6i")
 script = ExtResource("6_m18wu")

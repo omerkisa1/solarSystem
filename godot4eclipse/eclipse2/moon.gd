@@ -1,6 +1,6 @@
 extends MeshInstance3D
 
-var rotation_speed = 0.2  # Ay'ın kendi ekseni etrafında dönüş hızı
+@export var rotation_speed: float = 0.5  # Ay'ın kendi ekseni etrafındaki dönüş hızı
 
 func _process(delta):
-	rotate_y(rotation_speed * delta)
+	rotate_y(rotation_speed * delta)  # Y ekseni etrafında döner

@@ -1,20 +1,6 @@
 extends MeshInstance3D
 
+@export var rotation_speed: float = 1.0  # Dünya'nın kendi ekseni etrafındaki dönüş hızı
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-var rotation_speed = 1.0
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotate_y(rotation_speed  * delta) #set
-
-	## bavevcb
+	rotate_y(rotation_speed * delta)  # Y ekseni etrafında döner
