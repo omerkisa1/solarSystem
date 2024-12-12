@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 # Zoom parametreleri
 var zoom_speed = 5.0
@@ -14,7 +14,7 @@ var last_mouse_position = Vector2()
 
 # Dünya'ya odaklanma ayarları
 var is_locked_on_earth = false  # Kamera Dünya'ya kilitlenmiş mi?
-onready var earth = null  # Dünya düğümüne referans
+@onready var earth = null  # Dünya düğümüne referans
 
 func _ready():
 	# Dünya düğümünü bul
@@ -27,10 +27,10 @@ func _ready():
 func _input(event):
 	# Orta fare tuşuyla pan kontrolü
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_MIDDLE:
+		if event.button_index == MOUSE_BUTTON_MIDDLE:
 			mouse_middle_pressed = event.pressed
 			last_mouse_position = event.position
-		elif event.button_index == BUTTON_LEFT:  # Sol tıklama
+		elif event.button_index == MOUSE_BUTTON_LEFT:  # Sol tıklama
 			mouse_left_pressed = event.pressed
 			last_mouse_position = event.position
 
@@ -51,21 +51,21 @@ func _input(event):
 
 		elif mouse_left_pressed:  # Kamera çevirme
 			var delta = event.relative
-			rotate_x(deg2rad(-delta.y * sensitivity))  # Yukarı/aşağı
-			rotate_y(deg2rad(-delta.x * sensitivity))  # Sağa/sola
+			rotate_x(deg_to_rad(-delta.y * sensitivity))  # Yukarı/aşağı
+			rotate_y(deg_to_rad(-delta.x * sensitivity))  # Sağa/sola
 			rotation_degrees.x = clamp(rotation_degrees.x, -90, 90)  # Dikey açı sınırı
 
 	# Fare tekerleği ile zoom
-	if event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_UP:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP:
 		zoom_camera(-zoom_speed)  # Yakınlaştır
-	elif event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_DOWN:
+	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 		zoom_camera(zoom_speed)  # Uzaklaştır
 
 func zoom_camera(amount):
 	# Kamerayı Z ekseni boyunca ileri/geri hareket ettir
-	var new_translation = translation + transform.basis.z * amount
+	var new_translation = position + transform.basis.z * amount
 	if new_translation.length() >= min_distance and new_translation.length() <= max_distance:
-		translation = new_translation
+		position = new_translation
 
 func _process(delta):
 	# Eğer Dünya'ya kilitlenmişse, Dünya'ya odaklan

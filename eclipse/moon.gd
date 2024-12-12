@@ -1,4 +1,4 @@
-extends MeshInstance
+extends MeshInstance3D
 
 var rotation_speed = 0.2  # Ay'ın kendi ekseni etrafında dönüş hızı
 

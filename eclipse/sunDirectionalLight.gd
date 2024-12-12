@@ -1,4 +1,4 @@
-extends DirectionalLight
+extends DirectionalLight3D
 
 func _ready():
 	print_children_tree(self)  # Düğüm ağacını kontrol edin

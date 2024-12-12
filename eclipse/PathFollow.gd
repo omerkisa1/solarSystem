@@ -1,4 +1,4 @@
-extends PathFollow
+extends PathFollow3D
 
 var speed = 1.0  # Yörünge hızı
 

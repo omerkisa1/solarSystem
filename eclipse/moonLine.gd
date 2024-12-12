@@ -1,4 +1,4 @@
-extends ImmediateGeometry
+extends ImmediateMesh
 
 var radius = 10.0  # Yörünge yarıçapı (örneğin, Dünya için 10 birim)
 var segments = 64  # Dairenin ne kadar pürüzsüz olacağı (daha fazla segment = daha pürüzsüz çizgi)
