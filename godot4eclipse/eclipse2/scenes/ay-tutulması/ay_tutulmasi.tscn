@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://p4efyi5ntik7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orqy1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h2q2e"]
+material = SubResource("StandardMaterial3D_orqy1")
+
+[node name="Node" type="Node"]
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("SphereMesh_h2q2e")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(-0.0172255, 0, 0.999852, 0, 1, 0, -0.999852, 0, -0.0172255, 1.38146, -0.112761, -0.158245)

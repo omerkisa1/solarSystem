@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dg167vewhsmpr"]
+[gd_scene load_steps=26 format=3 uid="uid://dg167vewhsmpr"]
 
 [ext_resource type="Script" path="res://camera_3d.gd" id="1_4jn50"]
 [ext_resource type="Script" path="res://node.gd" id="1_ahblu"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://moon.gd" id="8_1gnb0"]
 [ext_resource type="Texture2D" uid="uid://clg53sc5f31or" path="res://2k_moon.jpg" id="9_n617n"]
 [ext_resource type="Texture2D" uid="uid://yokbbf62ycqg" path="res://2k_stars.jpg" id="13_5eyfj"]
+[ext_resource type="Script" path="res://control.gd" id="14_fxxi3"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fjcbk"]
 
@@ -44,6 +45,9 @@ background_mode = 2
 sky = SubResource("Sky_p175r")
 ambient_light_color = Color(1, 1, 1, 1)
 glow_enabled = true
+
+[sub_resource type="LabelSettings" id="LabelSettings_cnjxg"]
+font_color = Color(1, 0.0666667, 1, 1)
 
 [node name="Node" type="Node"]
 script = ExtResource("1_ahblu")
@@ -86,3 +90,35 @@ script = ExtResource("1_4jn50")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dcrbj")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 50.0
+offset_bottom = 46.0
+script = ExtResource("14_fxxi3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Merhabalar Bir Seçenek Seçiniz :)
+"
+label_settings = SubResource("LabelSettings_cnjxg")
+
+[node name="AyTutulmasiButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Ay Tutulması"
+
+[node name="GunesTutulmasiButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Güneş Tutulamsı "
+
+[node name="AyinEvleriButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Ayın Evreleri"
