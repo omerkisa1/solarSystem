@@ -1,11 +1,12 @@
 extends DirectionalLight3D
 
-func _process(_delta):
-	var earth = get_node("/root/Node/Node3D/EarthOrbit/Earth")  # Düğümü alın
-	if earth:  # Eğer düğüm geçerliyse
-		if global_transform.origin.distance_to(earth.global_transform.origin) > 0.1:
-			look_at(earth.global_transform.origin, Vector3.UP)
-		else:
-			print("DirectionalLight3D Dünya ile aynı pozisyonda, look_at çağrısı atlandı.")
-	else:
-		print("Earth düğümü bulunamadı!")
+@export var sun_node_path: NodePath
+
+func _ready():
+	if sun_node_path:
+		# Güneş düğümünü bul
+		var sun = get_node("root/Node/Node3D/sun")
+		if sun:
+			global_position = sun.global_position
+			# Işık sürekli olarak güneş ile aynı yerde kalacak
+			look_at(Vector3(0, 0, 0)) # Opsiyonel: Işığın hangi yöne bakacağı

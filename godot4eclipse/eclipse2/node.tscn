@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://dg167vewhsmpr"]
+[gd_scene load_steps=24 format=3 uid="uid://dg167vewhsmpr"]
 
 [ext_resource type="Script" path="res://camera_3d.gd" id="1_4jn50"]
 [ext_resource type="Script" path="res://node.gd" id="1_ahblu"]
 [ext_resource type="Texture2D" uid="uid://dso1lopep0m7q" path="res://2k_sun.jpg" id="2_1lra1"]
+[ext_resource type="Script" path="res://node_3d.gd" id="2_hre8t"]
 [ext_resource type="Script" path="res://sun.gd" id="3_lj6fl"]
 [ext_resource type="Script" path="res://directional_light_3d.gd" id="4_xmukb"]
 [ext_resource type="Script" path="res://earth_orbit.gd" id="5_57xwx"]
@@ -11,6 +12,7 @@
 [ext_resource type="Script" path="res://moon_orbit.gd" id="7_6jblq"]
 [ext_resource type="Script" path="res://moon.gd" id="8_1gnb0"]
 [ext_resource type="Texture2D" uid="uid://clg53sc5f31or" path="res://2k_moon.jpg" id="9_n617n"]
+[ext_resource type="Texture2D" uid="uid://yokbbf62ycqg" path="res://2k_stars.jpg" id="13_5eyfj"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fjcbk"]
 
@@ -29,19 +31,31 @@ albedo_texture = ExtResource("6_rmoco")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wjv4"]
 albedo_texture = ExtResource("9_n617n")
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nxa0u"]
+panorama = ExtResource("13_5eyfj")
+
+[sub_resource type="Sky" id="Sky_p175r"]
+sky_material = SubResource("PanoramaSkyMaterial_nxa0u")
+
+[sub_resource type="Environment" id="Environment_dcrbj"]
+background_mode = 2
+sky = SubResource("Sky_p175r")
+
 [node name="Node" type="Node"]
 script = ExtResource("1_ahblu")
 
 [node name="Node3D" type="Node3D" parent="."]
+script = ExtResource("2_hre8t")
 
 [node name="sun" type="MeshInstance3D" parent="Node3D"]
-transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
 mesh = SubResource("SphereMesh_fjcbk")
 skin = SubResource("Skin_2lvvi")
 surface_material_override/0 = SubResource("StandardMaterial3D_g23pj")
 script = ExtResource("3_lj6fl")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Node3D/sun"]
+sky_mode = 1
 script = ExtResource("4_xmukb")
 
 [node name="EarthOrbit" type="Node3D" parent="Node3D"]
@@ -64,3 +78,6 @@ script = ExtResource("8_1gnb0")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 script = ExtResource("1_4jn50")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_dcrbj")
