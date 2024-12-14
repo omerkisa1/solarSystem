@@ -1,0 +1,128 @@
+[gd_scene load_steps=27 format=3 uid="uid://bayx5m3uynbjj"]
+
+[ext_resource type="Script" path="res://ay_tutulmasi.gd" id="1_8x3wh"]
+[ext_resource type="Script" path="res://node_3_daytutulmasi.gd" id="2_c7vnx"]
+[ext_resource type="Script" path="res://sun.gd" id="3_8i6bq"]
+[ext_resource type="Texture2D" uid="uid://dso1lopep0m7q" path="res://2k_sun.jpg" id="3_detdd"]
+[ext_resource type="Script" path="res://earth_orbit.gd" id="5_3umtg"]
+[ext_resource type="Script" path="res://directional_light_3_day.gd" id="5_21mo1"]
+[ext_resource type="Script" path="res://earth.gd" id="6_mo2wd"]
+[ext_resource type="Texture2D" uid="uid://0763p8mdcnpi" path="res://2k_earth_daymap.jpg" id="7_ytojp"]
+[ext_resource type="Script" path="res://moon.gd" id="8_5b3sa"]
+[ext_resource type="Script" path="res://moon_orbitay.gd" id="9_1umso"]
+[ext_resource type="Texture2D" uid="uid://clg53sc5f31or" path="res://2k_moon.jpg" id="10_kem3n"]
+[ext_resource type="Script" path="res://earth_to_moon.gd" id="10_n1swi"]
+[ext_resource type="Script" path="res://camera_3_day.gd" id="12_fpmi3"]
+[ext_resource type="Texture2D" uid="uid://yokbbf62ycqg" path="res://2k_stars.jpg" id="12_g6fwc"]
+[ext_resource type="Script" path="res://control_2.gd" id="15_4huhl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ilaca"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbv6h"]
+albedo_texture = ExtResource("3_detdd")
+emission_enabled = true
+emission_texture = ExtResource("3_detdd")
+
+[sub_resource type="TorusMesh" id="TorusMesh_st8om"]
+inner_radius = 1.984
+outer_radius = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_uqb0v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh6yf"]
+albedo_texture = ExtResource("7_ytojp")
+
+[sub_resource type="SphereMesh" id="SphereMesh_gibk6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76kic"]
+albedo_texture = ExtResource("10_kem3n")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lhcve"]
+panorama = ExtResource("12_g6fwc")
+
+[sub_resource type="Sky" id="Sky_flyl7"]
+sky_material = SubResource("PanoramaSkyMaterial_lhcve")
+
+[sub_resource type="Environment" id="Environment_n3qa0"]
+background_mode = 2
+sky = SubResource("Sky_flyl7")
+
+[sub_resource type="LabelSettings" id="LabelSettings_heue2"]
+font_size = 21
+font_color = Color(0.801039, 0.00151771, 0.00197413, 1)
+
+[node name="Node" type="Node"]
+script = ExtResource("1_8x3wh")
+
+[node name="Node3Daytutulmasi" type="Node3D" parent="."]
+script = ExtResource("2_c7vnx")
+
+[node name="sun" type="MeshInstance3D" parent="Node3Daytutulmasi"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+mesh = SubResource("SphereMesh_ilaca")
+surface_material_override/0 = SubResource("StandardMaterial3D_jbv6h")
+script = ExtResource("3_8i6bq")
+
+[node name="DirectionalLight3Day" type="DirectionalLight3D" parent="Node3Daytutulmasi/sun"]
+script = ExtResource("5_21mo1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3Daytutulmasi/sun"]
+mesh = SubResource("TorusMesh_st8om")
+skeleton = NodePath("../DirectionalLight3Day")
+
+[node name="EarthOrbit" type="Node3D" parent="Node3Daytutulmasi"]
+script = ExtResource("5_3umtg")
+
+[node name="Earth" type="MeshInstance3D" parent="Node3Daytutulmasi/EarthOrbit"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 59, 0, 0)
+mesh = SubResource("SphereMesh_uqb0v")
+surface_material_override/0 = SubResource("StandardMaterial3D_vh6yf")
+script = ExtResource("6_mo2wd")
+
+[node name="MoonOrbitay" type="Node3D" parent="Node3Daytutulmasi/EarthOrbit/Earth"]
+script = ExtResource("9_1umso")
+
+[node name="Moon" type="MeshInstance3D" parent="Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("SphereMesh_gibk6")
+surface_material_override/0 = SubResource("StandardMaterial3D_76kic")
+script = ExtResource("8_5b3sa")
+
+[node name="Camera3Day" type="Camera3D" parent="Node3Daytutulmasi"]
+script = ExtResource("12_fpmi3")
+
+[node name="earth_to_moon" type="Camera3D" parent="Node3Daytutulmasi"]
+transform = Transform3D(-0.168489, 0, -0.985703, 0, 1, 0, 0.985703, 0, -0.168489, 64.298, 0, 0)
+script = ExtResource("10_n1swi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n3qa0")
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("15_4huhl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Control2"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 57.0
+offset_right = 901.0
+offset_bottom = 125.0
+text = "Ay Tutulması ,
+Dünyanın Güneş ile Ay arasına girmesi ile gerçekleşir 
+"
+label_settings = SubResource("LabelSettings_heue2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Control2"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 13.0
+offset_right = 166.0
+offset_bottom = 44.0
+text = "Ana Menüye Dön "
+metadata/_edit_use_anchors_ = true

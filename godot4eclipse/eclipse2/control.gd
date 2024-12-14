@@ -1,8 +1,8 @@
 extends Control
 
 # Sahne dosyalarını manuel olarak yükle
-var ay_tutulmasi_scene: PackedScene = load("res://scenes/ay-tutulması/ay_tutulmasi.tscn")
-#var gunes_tutulmasi_scene: PackedScene = load("res://gunes_tutulmasi.tscn")
+var ay_tutulmasi_scene: PackedScene = load("res://ay_tutulmasi.tscn")
+var gunes_tutulmasi_scene: PackedScene = load("res://gunes_tutulmasi.tscn")
 #var ayin_evleri_scene: PackedScene = load("res://ayin_evleri.tscn")
 
 func _ready():
@@ -18,7 +18,7 @@ func _on_ay_tutulmasi_pressed():
 
 func _on_gunes_tutulmasi_pressed():
 	print("Güneş Tutulması sahnesine gidiliyor.")
-	#get_tree().change_scene_to_packed(gunes_tutulmasi_scene)
+	get_tree().change_scene_to_packed(gunes_tutulmasi_scene)
 
 func _on_ayin_evleri_pressed():
 	print("Ayın Evreleri sahnesine gidiliyor.")

@@ -18,7 +18,7 @@ var is_locked_on_earth = false  # Kamera Dünya'ya kilitlenmiş mi?
 
 func _ready():
 	# Dünya düğümünü bul
-	earth = get_node("/root/Node/Node3D/EarthOrbit/Earth")  # Sahne yapınıza göre yolu kontrol edin
+	earth = get_node("/root/Node/Node3Daytutulmasi/EarthOrbit/Earth")  # Sahne yapınıza göre yolu kontrol edin
 	if earth:
 		print("Dünya bulundu: ", earth.name)
 	else:

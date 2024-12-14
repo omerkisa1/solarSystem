@@ -1,0 +1,122 @@
+[gd_scene load_steps=26 format=3 uid="uid://4gqxquwtw64c"]
+
+[ext_resource type="Texture2D" uid="uid://dso1lopep0m7q" path="res://2k_sun.jpg" id="1_7xt80"]
+[ext_resource type="Script" path="res://node_3_dgunestutulmasi.gd" id="1_rw671"]
+[ext_resource type="Texture2D" uid="uid://0763p8mdcnpi" path="res://2k_earth_daymap.jpg" id="2_ly5nv"]
+[ext_resource type="Script" path="res://directional_light_3_dgunes.gd" id="2_mievu"]
+[ext_resource type="Texture2D" uid="uid://yokbbf62ycqg" path="res://2k_stars.jpg" id="2_mqqmc"]
+[ext_resource type="Script" path="res://sun.gd" id="3_4ce14"]
+[ext_resource type="Script" path="res://earth_orbit.gd" id="3_82lvv"]
+[ext_resource type="Script" path="res://moon_orbitgunes.gd" id="3_a6dbl"]
+[ext_resource type="Texture2D" uid="uid://clg53sc5f31or" path="res://2k_moon.jpg" id="3_buu7t"]
+[ext_resource type="Script" path="res://camera_3_dgunes.gd" id="4_4irdn"]
+[ext_resource type="Script" path="res://earth.gd" id="5_bj0fq"]
+[ext_resource type="Script" path="res://moon.gd" id="8_ygd7h"]
+[ext_resource type="Script" path="res://earth_to_sun.gd" id="12_aajhu"]
+[ext_resource type="Script" path="res://control_gunes.gd" id="14_0frqd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_tdpnh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uly48"]
+albedo_texture = ExtResource("1_7xt80")
+emission_enabled = true
+emission_texture = ExtResource("1_7xt80")
+
+[sub_resource type="TorusMesh" id="TorusMesh_pc3il"]
+inner_radius = 1.984
+outer_radius = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_sbexu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jm64n"]
+albedo_texture = ExtResource("2_ly5nv")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cnnif"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5xhb"]
+albedo_texture = ExtResource("3_buu7t")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vec8s"]
+panorama = ExtResource("2_mqqmc")
+
+[sub_resource type="Sky" id="Sky_1lcfy"]
+sky_material = SubResource("PanoramaSkyMaterial_vec8s")
+
+[sub_resource type="Environment" id="Environment_yokfd"]
+background_mode = 2
+sky = SubResource("Sky_1lcfy")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ivdfw"]
+font_size = 21
+font_color = Color(0.772549, 0.0156863, 0, 1)
+
+[node name="Node" type="Node"]
+
+[node name="Node3Dgunestutulmasi" type="Node3D" parent="."]
+script = ExtResource("1_rw671")
+
+[node name="sun" type="MeshInstance3D" parent="Node3Dgunestutulmasi"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+mesh = SubResource("SphereMesh_tdpnh")
+surface_material_override/0 = SubResource("StandardMaterial3D_uly48")
+script = ExtResource("3_4ce14")
+
+[node name="DirectionalLight3Dgunes" type="DirectionalLight3D" parent="Node3Dgunestutulmasi/sun"]
+script = ExtResource("2_mievu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3Dgunestutulmasi/sun"]
+mesh = SubResource("TorusMesh_pc3il")
+
+[node name="EarthOrbit" type="Node3D" parent="Node3Dgunestutulmasi"]
+script = ExtResource("3_82lvv")
+
+[node name="Earth" type="MeshInstance3D" parent="Node3Dgunestutulmasi/EarthOrbit"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 59, 0, 0)
+mesh = SubResource("SphereMesh_sbexu")
+surface_material_override/0 = SubResource("StandardMaterial3D_jm64n")
+script = ExtResource("5_bj0fq")
+
+[node name="MoonOrbitgunes" type="Node3D" parent="Node3Dgunestutulmasi/EarthOrbit/Earth"]
+script = ExtResource("3_a6dbl")
+
+[node name="Moon" type="MeshInstance3D" parent="Node3Dgunestutulmasi/EarthOrbit/Earth/MoonOrbitgunes"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("SphereMesh_cnnif")
+surface_material_override/0 = SubResource("StandardMaterial3D_i5xhb")
+script = ExtResource("8_ygd7h")
+
+[node name="Camera3Dgunes" type="Camera3D" parent="Node3Dgunestutulmasi"]
+script = ExtResource("4_4irdn")
+
+[node name="earth_to_sun" type="Camera3D" parent="Node3Dgunestutulmasi"]
+transform = Transform3D(0.181102, 0.0408299, -0.982616, 0.0368825, 0.998153, 0.0482732, 0.982772, -0.0449837, 0.179262, -55.5864, -0.0320182, 6.33583)
+script = ExtResource("12_aajhu")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yokfd")
+
+[node name="ControlGunes" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_0frqd")
+
+[node name="Label" type="Label" parent="ControlGunes"]
+layout_mode = 0
+offset_left = 587.0
+offset_top = 75.0
+offset_right = 1107.0
+offset_bottom = 138.0
+text = "Güneş Tutulması ,
+Ayın Güneş ile Dünya arasına girmesi ile gerçekleşir 
+"
+label_settings = SubResource("LabelSettings_ivdfw")
+
+[node name="Button" type="Button" parent="ControlGunes"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 28.0
+offset_right = 174.0
+offset_bottom = 59.0
+text = "Ana Menüye Dön"

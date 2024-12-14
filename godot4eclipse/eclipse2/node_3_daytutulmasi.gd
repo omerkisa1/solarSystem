@@ -1,6 +1,6 @@
 extends Node3D
-
 # Yörünge hızları
+
 @export var earth_orbit_speed: float = 5.0
 @export var moon_orbit_speed: float = 10.0
 @export var delay_before_eclipse_check: float = 3.0  # Ay tutulması kontrolünden önce bekleme süresi (saniye)
@@ -18,8 +18,8 @@ var eclipse_camera: Camera3D = null
 
 func _ready():
 	# Kameraları hazır olduğunda ata
-	main_camera = $/root/Node/Node3D/Camera3D
-	eclipse_camera = $/root/Node/Node3D/earth_to_moon
+	main_camera = $/root/Node/Node3Daytutulmasi/Camera3Day
+	eclipse_camera = $/root/Node/Node3Daytutulmasi/earth_to_moon
 
 func _process(delta):
 	# İlk gecikme süresi boyunca herhangi bir işlem yapma
@@ -35,9 +35,9 @@ func _process(delta):
 	update_orbits(delta)
 
 	# Pozisyonları al
-	var sun_position = $/root/Node/Node3D/sun.global_transform.origin
-	var earth_position = $/root/Node/Node3D/EarthOrbit/Earth.global_transform.origin
-	var moon_position = $/root/Node/Node3D/EarthOrbit/Earth/MoonOrbit/Moon.global_transform.origin
+	var sun_position = $/root/Node/Node3Daytutulmasi/sun.global_transform.origin
+	var earth_position = $/root/Node/Node3Daytutulmasi/EarthOrbit/Earth.global_transform.origin
+	var moon_position = $/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon.global_transform.origin
 
 	# Ay tutulması kontrolü
 	if is_eclipse(earth_position, moon_position, sun_position):
@@ -67,7 +67,7 @@ func update_orbits(delta):
 
 	var earth_x_position = 60.0 * cos(deg_to_rad(current_earth_angle))
 	var earth_z_position = 60.0 * sin(deg_to_rad(current_earth_angle))
-	$/root/Node/Node3D/EarthOrbit/Earth.global_transform.origin = Vector3(earth_x_position, 0, earth_z_position)
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth.global_transform.origin = Vector3(earth_x_position, 0, earth_z_position)
 
 	# Ay'ın hareketi
 	current_moon_angle += moon_orbit_speed * delta
@@ -76,8 +76,8 @@ func update_orbits(delta):
 
 	var moon_x_position = 10.0 * cos(deg_to_rad(current_moon_angle))
 	var moon_z_position = 10.0 * sin(deg_to_rad(current_moon_angle))
-	var earth_position = $/root/Node/Node3D/EarthOrbit/Earth.global_transform.origin
-	$/root/Node/Node3D/EarthOrbit/Earth/MoonOrbit/Moon.global_transform.origin = earth_position + Vector3(moon_x_position, 0, moon_z_position)
+	var earth_position = $/root/Node/Node3Daytutulmasi/EarthOrbit/Earth.global_transform.origin
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon.global_transform.origin = earth_position + Vector3(moon_x_position, 0, moon_z_position)
 
 # Ay tutulması kontrolü (Dünya, Güneş ve Ay hizalaması)
 func is_eclipse(earth_pos, moon_pos, sun_pos):
@@ -87,20 +87,20 @@ func is_eclipse(earth_pos, moon_pos, sun_pos):
 
 # Yörünge hareketlerini durdur
 func pause_orbits():
-	$/root/Node/Node3D/EarthOrbit.pause_orbit()
-	$/root/Node/Node3D/EarthOrbit/Earth/MoonOrbit.pause_orbit()
+	$/root/Node/Node3Daytutulmasi/EarthOrbit.pause_orbit()
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay.pause_orbit()
 
 	# Kendi eksen dönüşlerini sıfırla ve durdur
-	$/root/Node/Node3D/EarthOrbit/Earth.rotation_degrees = Vector3(0, 0, 0)
-	$/root/Node/Node3D/EarthOrbit/Earth/MoonOrbit/Moon.rotation_degrees = Vector3(0, 0, 0)
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth.rotation_degrees = Vector3(0, 0, 0)
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon.rotation_degrees = Vector3(0, 0, 0)
 
-	$/root/Node/Node3D/EarthOrbit/Earth.set_process(false)
-	$/root/Node/Node3D/EarthOrbit/Earth/MoonOrbit/Moon.set_process(false)
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth.set_process(false)
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon.set_process(false)
 
 # Dünya ve Ay'ı hizalanma pozisyonunda sabit tut
 func lock_positions(earth_pos, moon_pos):
-	$/root/Node/Node3D/EarthOrbit/Earth.global_transform.origin = earth_pos
-	$/root/Node/Node3D/EarthOrbit/Earth/MoonOrbit/Moon.global_transform.origin = moon_pos
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth.global_transform.origin = earth_pos
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon.global_transform.origin = moon_pos
 	print("Pozisyonlar sabitlendi: Dünya ve Ay hizalanmış durumda.")
 
 # Kamerayı değiştir

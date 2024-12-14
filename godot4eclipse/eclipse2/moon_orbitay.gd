@@ -17,7 +17,7 @@ func _process(delta):
 	var x_position = orbit_radius * cos(deg_to_rad(current_angle))
 	var z_position = orbit_radius * sin(deg_to_rad(current_angle))
 
-	var earth_position = $"/root/Node/Node3D/EarthOrbit/Earth".global_transform.origin
+	var earth_position = $"/root/Node/Node3Daytutulmasi/EarthOrbit/Earth".global_transform.origin
 	$Moon.global_transform.origin = earth_position + Vector3(x_position, 0, z_position)
 
 func pause_orbit():
