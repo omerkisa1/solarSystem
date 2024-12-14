@@ -1,0 +1,6 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://btojxec2f7vb"]
+
+[ext_resource type="Texture2D" uid="uid://boanqf7an4i3m" path="res://2k_mars.jpg" id="1_jicdi"]
+
+[resource]
+albedo_texture = ExtResource("1_jicdi")

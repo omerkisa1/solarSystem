@@ -16,10 +16,21 @@ var elapsed_time: float = 0.0  # Geçen süreyi takip eder
 var main_camera: Camera3D = null
 var eclipse_camera: Camera3D = null
 
+# Material değişkenleri
+var default_material: Material = preload("res://2k_moon.tres")
+var eclipse_material: Material = preload("res://2k_mars.tres")
+
+# Oyun hızını takip etmek için bir değişken
+var game_paused: bool = false
+var current_speed: float = 1.0  # Varsayılan hız 1x
+
 func _ready():
 	# Kameraları hazır olduğunda ata
 	main_camera = $/root/Node/Node3Daytutulmasi/Camera3Day
 	eclipse_camera = $/root/Node/Node3Daytutulmasi/earth_to_moon
+
+	# Ay'ın başlangıç materialını ayarla
+	$/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon.set_surface_override_material(0, default_material)
 
 func _process(delta):
 	# İlk gecikme süresi boyunca herhangi bir işlem yapma
@@ -52,11 +63,53 @@ func _process(delta):
 		print("Ay tutulması gerçekleşiyor! Eğer görmek istiyorsanız D tuşuna basınız.")
 		lock_positions(earth_position, moon_position)
 
-func _input(_event):
+		# Ay'ın materialını değiştir
+		change_moon_material(eclipse_material)
+
+func change_moon_material(material: Material):
+	# Ay'ın materialını değiştirir
+	var moon = $/root/Node/Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay/Moon
+	moon.set_surface_override_material(0, material)
+	print("Ay'ın materialı değiştirildi.")
+
+func _input(event):
 	if Input.is_action_just_pressed("switch_to_eclipse_camera"):
 		activate_camera(eclipse_camera)  # Ay tutulması kamerasına geç
 	elif Input.is_action_just_pressed("switch_to_main_camera"):
 		activate_camera(main_camera)  # Ana kameraya geri dön
+
+	# P tuşu ile oyunu durdur/devam ettir
+	if Input.is_action_just_pressed("pause_game"):
+		toggle_game_pause()
+
+	# 1, 2, 3 tuşları ile oyun hızını değiştir
+	if Input.is_action_just_pressed("speed_1"):
+		change_game_speed(1.0)
+	elif Input.is_action_just_pressed("speed_2"):
+		change_game_speed(2.0)
+	elif Input.is_action_just_pressed("speed_3"):
+		change_game_speed(3.0)
+
+# Oyun hızını durdur veya devam ettir
+func toggle_game_pause():
+	if game_paused:
+		Engine.time_scale = current_speed  # Mevcut hızda devam et
+		game_paused = false
+		print("Oyun devam ediyor...")
+	else:
+		Engine.time_scale = 0  # Oyunu tamamen durdur
+		game_paused = true
+		print("Oyun durduruldu.")
+
+# Oyun hızını değiştir
+func change_game_speed(speed: float):
+	if game_paused:
+		print("Oyun durdurulmuşken hız değiştirilemez.")
+		return
+
+	current_speed = speed
+	Engine.time_scale = current_speed
+	print("Oyun hızı değiştirildi: %.1fx" % current_speed)
 
 # Dünya ve Ay'ın hareketini güncelle
 func update_orbits(delta):

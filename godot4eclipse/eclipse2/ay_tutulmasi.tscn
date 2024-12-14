@@ -34,7 +34,7 @@ albedo_texture = ExtResource("7_ytojp")
 
 [sub_resource type="SphereMesh" id="SphereMesh_gibk6"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76kic"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykrrh"]
 albedo_texture = ExtResource("10_kem3n")
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lhcve"]
@@ -85,7 +85,7 @@ script = ExtResource("9_1umso")
 [node name="Moon" type="MeshInstance3D" parent="Node3Daytutulmasi/EarthOrbit/Earth/MoonOrbitay"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 mesh = SubResource("SphereMesh_gibk6")
-surface_material_override/0 = SubResource("StandardMaterial3D_76kic")
+surface_material_override/0 = SubResource("StandardMaterial3D_ykrrh")
 script = ExtResource("8_5b3sa")
 
 [node name="Camera3Day" type="Camera3D" parent="Node3Daytutulmasi"]
