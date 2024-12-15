@@ -1,0 +1,100 @@
+[gd_scene load_steps=24 format=3 uid="uid://bnh6o3sxo6oe5"]
+
+[ext_resource type="Script" path="res://ay_tutulmasi.gd" id="1_5kyn0"]
+[ext_resource type="Script" path="res://node_3_devre.gd" id="2_qt600"]
+[ext_resource type="Texture2D" uid="uid://dso1lopep0m7q" path="res://2k_sun.jpg" id="3_qd8f4"]
+[ext_resource type="Script" path="res://sun.gd" id="4_4btss"]
+[ext_resource type="Script" path="res://directional_light_3_devre.gd" id="5_qxqp7"]
+[ext_resource type="Script" path="res://earth_orbit.gd" id="6_re58i"]
+[ext_resource type="Texture2D" uid="uid://0763p8mdcnpi" path="res://2k_earth_daymap.jpg" id="7_88c3k"]
+[ext_resource type="Script" path="res://earth.gd" id="8_lhkqo"]
+[ext_resource type="Script" path="res://moon_orbitevre.gd" id="9_ewgbs"]
+[ext_resource type="Texture2D" uid="uid://clg53sc5f31or" path="res://2k_moon.jpg" id="10_hop6v"]
+[ext_resource type="Script" path="res://moon.gd" id="11_uksni"]
+[ext_resource type="Script" path="res://earth_to_moon_evre.gd" id="12_5paou"]
+[ext_resource type="Texture2D" uid="uid://yokbbf62ycqg" path="res://2k_stars.jpg" id="14_orrpd"]
+[ext_resource type="Script" path="res://controlevre.gd" id="14_qp1dp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_ilaca"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbv6h"]
+albedo_texture = ExtResource("3_qd8f4")
+emission_enabled = true
+emission_texture = ExtResource("3_qd8f4")
+
+[sub_resource type="SphereMesh" id="SphereMesh_uqb0v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh6yf"]
+albedo_texture = ExtResource("7_88c3k")
+
+[sub_resource type="SphereMesh" id="SphereMesh_gibk6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ykrrh"]
+albedo_texture = ExtResource("10_hop6v")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lhcve"]
+panorama = ExtResource("14_orrpd")
+
+[sub_resource type="Sky" id="Sky_flyl7"]
+sky_material = SubResource("PanoramaSkyMaterial_lhcve")
+
+[sub_resource type="Environment" id="Environment_n3qa0"]
+background_mode = 2
+sky = SubResource("Sky_flyl7")
+
+[node name="Node" type="Node"]
+script = ExtResource("1_5kyn0")
+
+[node name="Node3Devre" type="Node3D" parent="."]
+script = ExtResource("2_qt600")
+
+[node name="sun" type="MeshInstance3D" parent="Node3Devre"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+mesh = SubResource("SphereMesh_ilaca")
+surface_material_override/0 = SubResource("StandardMaterial3D_jbv6h")
+script = ExtResource("4_4btss")
+
+[node name="DirectionalLight3Devre" type="DirectionalLight3D" parent="Node3Devre/sun"]
+script = ExtResource("5_qxqp7")
+
+[node name="EarthOrbit" type="Node3D" parent="Node3Devre"]
+script = ExtResource("6_re58i")
+
+[node name="Earth" type="MeshInstance3D" parent="Node3Devre/EarthOrbit"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 59, 0, 0)
+mesh = SubResource("SphereMesh_uqb0v")
+surface_material_override/0 = SubResource("StandardMaterial3D_vh6yf")
+script = ExtResource("8_lhkqo")
+
+[node name="MoonOrbitevre" type="Node3D" parent="Node3Devre/EarthOrbit/Earth"]
+script = ExtResource("9_ewgbs")
+
+[node name="Moon" type="MeshInstance3D" parent="Node3Devre/EarthOrbit/Earth/MoonOrbitevre"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("SphereMesh_gibk6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ykrrh")
+script = ExtResource("11_uksni")
+
+[node name="moon_label" type="Label3D" parent="Node3Devre/EarthOrbit/Earth/MoonOrbitevre/Moon"]
+
+[node name="earth_to_moon_evre" type="Camera3D" parent="Node3Devre"]
+transform = Transform3D(-0.168489, 0, -0.985703, 0, 1, 0, 0.985703, 0, -0.168489, 64.298, 0, 0)
+script = ExtResource("12_5paou")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n3qa0")
+
+[node name="Controlevre" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("14_qp1dp")
+
+[node name="Button" type="Button" parent="Controlevre"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 28.0
+offset_right = 174.0
+offset_bottom = 59.0
+text = "Ana Menüye Dön"

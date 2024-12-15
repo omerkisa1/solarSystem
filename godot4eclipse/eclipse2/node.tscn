@@ -131,3 +131,87 @@ text = "Güneş Tutulamsı "
 [node name="AyinEvleriButton" type="Button" parent="Control/VBoxContainer"]
 layout_mode = 2
 text = "Ayın Evreleri"
+
+[node name="TumGezegenler" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Tüm Gezegenler"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_top = 520.0
+offset_right = 56.0
+offset_bottom = 625.0
+
+[node name="1x" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+text = "1x"
+
+[node name="2x" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+text = "2x"
+
+[node name="3x" type="Button" parent="Control/VBoxContainer2"]
+layout_mode = 2
+text = "3x"
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 530.0
+offset_right = 155.0
+offset_bottom = 610.0
+text = "Dur
+/
+Başlat"
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 882.0
+offset_right = 1049.0
+offset_bottom = 23.0
+text = "Görünüm Seçenekleri"
+
+[node name="Dunyadan" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 825.0
+offset_top = 25.0
+offset_right = 913.0
+offset_bottom = 70.0
+text = "Dünyadan"
+
+[node name="Gunesten" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 925.0
+offset_top = 25.0
+offset_right = 1013.0
+offset_bottom = 70.0
+text = "Güneşten"
+
+[node name="Aydan" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 25.0
+offset_right = 1113.0
+offset_bottom = 70.0
+text = "Aydan"
+
+[node name="Gorunum1" type="Button" parent="Control"]
+offset_left = 825.0
+offset_top = 75.0
+offset_right = 913.0
+offset_bottom = 120.0
+text = "Görünüm1"
+
+[node name="Gorunum2" type="Button" parent="Control"]
+offset_left = 925.0
+offset_top = 75.0
+offset_right = 1013.0
+offset_bottom = 120.0
+text = "Görünüm2"
+
+[node name="Gorunum3" type="Button" parent="Control"]
+offset_left = 1025.0
+offset_top = 75.0
+offset_right = 1113.0
+offset_bottom = 120.0
+text = "Görünüm3"

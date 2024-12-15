@@ -3,7 +3,7 @@ extends Control
 # Sahne dosyalarını manuel olarak yükle
 var ay_tutulmasi_scene: PackedScene = load("res://ay_tutulmasi.tscn")
 var gunes_tutulmasi_scene: PackedScene = load("res://gunes_tutulmasi.tscn")
-#var ayin_evleri_scene: PackedScene = load("res://ayin_evleri.tscn")
+var ayin_evleri_scene: PackedScene = load("res://ayin_evreleri.tscn")
 
 func _ready():
 	# Butonları bağla
@@ -22,4 +22,4 @@ func _on_gunes_tutulmasi_pressed():
 
 func _on_ayin_evleri_pressed():
 	print("Ayın Evreleri sahnesine gidiliyor.")
-	#get_tree().change_scene_to_packed(ayin_evleri_scene)
+	get_tree().change_scene_to_packed(ayin_evleri_scene)
