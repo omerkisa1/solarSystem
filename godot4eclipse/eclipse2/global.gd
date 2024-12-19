@@ -14,7 +14,6 @@ func increase_speeds(factor: float):
 	earth_orbit_speed *= factor
 	moon_rotation_speed *= factor
 	moon_orbit_speed *= factor
-	print("Hızlar artırıldı! Sun:", sun_rotation_speed, "Earth Orbit:", earth_orbit_speed)
 
 # Hızları azaltan fonksiyon
 func decrease_speeds(factor: float):

@@ -1,7 +1,7 @@
 extends Button
 
 func _on_pressed():
-	print("1x butonuna basıldı!")  # Konsolda bu mesajı göreceksiniz
+	print("1x butonuna basıldı")  
 	Global.sun_rotation_speed = 0.2
 	Global.earth_rotation_speed = 1.0
 	Global.earth_orbit_speed = 5.0

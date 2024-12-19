@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dg167vewhsmpr"]
+[gd_scene load_steps=31 format=3 uid="uid://dg167vewhsmpr"]
 
 [ext_resource type="Script" path="res://camera_3d.gd" id="1_4jn50"]
 [ext_resource type="Script" path="res://node.gd" id="1_ahblu"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://1x.gd" id="15_ww37p"]
 [ext_resource type="Script" path="res://2x.gd" id="16_t22wx"]
 [ext_resource type="Script" path="res://3x.gd" id="17_4600g"]
+[ext_resource type="Script" path="res://PlayStopButton.gd" id="18_4ahn7"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fjcbk"]
 
@@ -169,6 +170,7 @@ offset_bottom = 610.0
 text = "Dur
 /
 Başlat"
+script = ExtResource("18_4ahn7")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
@@ -228,3 +230,4 @@ text = "Görünüm3"
 [connection signal="pressed" from="Control/VBoxContainer2/1x" to="Control/VBoxContainer2/1x" method="_on_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/2x" to="Control/VBoxContainer2/2x" method="_on_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer2/3x" to="Control/VBoxContainer2/3x" method="_on_pressed"]
+[connection signal="pressed" from="Control/Button" to="Control/Button" method="_on_pressed"]
