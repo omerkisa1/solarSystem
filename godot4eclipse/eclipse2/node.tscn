@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dg167vewhsmpr"]
+[gd_scene load_steps=30 format=3 uid="uid://dg167vewhsmpr"]
 
 [ext_resource type="Script" path="res://camera_3d.gd" id="1_4jn50"]
 [ext_resource type="Script" path="res://node.gd" id="1_ahblu"]
@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://clg53sc5f31or" path="res://2k_moon.jpg" id="9_n617n"]
 [ext_resource type="Texture2D" uid="uid://yokbbf62ycqg" path="res://2k_stars.jpg" id="13_5eyfj"]
 [ext_resource type="Script" path="res://control.gd" id="14_fxxi3"]
+[ext_resource type="Script" path="res://1x.gd" id="15_ww37p"]
+[ext_resource type="Script" path="res://2x.gd" id="16_t22wx"]
+[ext_resource type="Script" path="res://3x.gd" id="17_4600g"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_fjcbk"]
 
@@ -145,14 +148,17 @@ offset_bottom = 625.0
 [node name="1x" type="Button" parent="Control/VBoxContainer2"]
 layout_mode = 2
 text = "1x"
+script = ExtResource("15_ww37p")
 
 [node name="2x" type="Button" parent="Control/VBoxContainer2"]
 layout_mode = 2
 text = "2x"
+script = ExtResource("16_t22wx")
 
 [node name="3x" type="Button" parent="Control/VBoxContainer2"]
 layout_mode = 2
 text = "3x"
+script = ExtResource("17_4600g")
 
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 0
@@ -196,6 +202,7 @@ offset_bottom = 70.0
 text = "Aydan"
 
 [node name="Gorunum1" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 825.0
 offset_top = 75.0
 offset_right = 913.0
@@ -203,6 +210,7 @@ offset_bottom = 120.0
 text = "Görünüm1"
 
 [node name="Gorunum2" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 925.0
 offset_top = 75.0
 offset_right = 1013.0
@@ -210,8 +218,13 @@ offset_bottom = 120.0
 text = "Görünüm2"
 
 [node name="Gorunum3" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 1025.0
 offset_top = 75.0
 offset_right = 1113.0
 offset_bottom = 120.0
 text = "Görünüm3"
+
+[connection signal="pressed" from="Control/VBoxContainer2/1x" to="Control/VBoxContainer2/1x" method="_on_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/2x" to="Control/VBoxContainer2/2x" method="_on_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer2/3x" to="Control/VBoxContainer2/3x" method="_on_pressed"]
