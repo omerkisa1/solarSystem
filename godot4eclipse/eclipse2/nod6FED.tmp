@@ -40,8 +40,8 @@ albedo_texture = ExtResource("9_n617n")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2ntj7"]
 
-[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_re18e"]
-radius = 0.1
+[sub_resource type="SphereMesh" id="SphereMesh_r4bl4"]
+radius = 1.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nxa0u"]
 panorama = ExtResource("13_5eyfj")
@@ -95,11 +95,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1wjv4")
 script = ExtResource("8_1gnb0")
 
 [node name="TrailParticles" type="GPUParticles3D" parent="Node3D/EarthOrbit"]
-transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
-amount = 50
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+amount = 20
 lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_2ntj7")
-draw_pass_1 = SubResource("TubeTrailMesh_re18e")
+draw_pass_1 = SubResource("SphereMesh_r4bl4")
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
 script = ExtResource("1_4jn50")
